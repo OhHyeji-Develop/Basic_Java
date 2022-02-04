@@ -60,7 +60,7 @@ public class RepetitiveStatement {
 			sum += i;
 			}
 		}
-		System.out.println(sum);
+		System.out.println("짝수의 합 : " + sum);
 //------------------------------------------------		
 		//1부터 100까지 짝수의 합을 출력해주세요.		
 		sum = 0;
@@ -96,14 +96,15 @@ public class RepetitiveStatement {
 //------------------------------------------------
 		//구구단 출력 
 		// 2 * 1 = 2	3 * 1 = 3	4 * 1 = 4
-		for(int j = 1; j <= 9; j++) { //밖에 있는 변수
-			for(int i = 2; i <=9; i++) { // 안쪽에 있는 변수
-				System.out.print(i + " * " + j + " = " + j * i	+ "\t");
-				}System.out.println();
+		for (int j = 1; j <= 9; j++) { // 밖에 있는 변수
+			for (int i = 2; i <= 9; i++) { // 안쪽에 있는 변수
+				System.out.print(i + " * " + j + " = " + j * i + "\t");
 			}
-		
-		for(int i = 1; i <= 9; i++) {
-			for(int j = 2; j <=9; j++) {
+			System.out.println();
+		}
+
+		for (int i = 1; i <= 9; i++) {
+			for (int j = 2; j <= 9; j++) {
 				System.out.print(j + " * " + i + " = " + i * j + "\t");
 			}
 			System.out.println();
@@ -122,11 +123,11 @@ public class RepetitiveStatement {
 		
 		Scanner s = new Scanner(System.in);
 		
-//		int input = 0;
-//		while(input != 3) {
-//			System.out.print("1.선택1 2.선택2 3.종료>");
-//			input = Integer.parseInt(s.nextLine());
-//		}
+		int input = 0;
+		while(input != 3) {
+			System.out.print("1.선택1 2.선택2 3.종료>");
+			input = Integer.parseInt(s.nextLine());
+		}
 
 //------------------------------------------------
 		/*

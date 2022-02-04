@@ -25,7 +25,7 @@ public class ScoreSem {
 		String[] subjects = {"국어", "영어", "수학", "사회", "과학", "Oracle", "Java"};
 		int[][] score = new int[names.length][subjects.length]; //점수를 저장할 score[25][7] 배열생성
 		
-		//점수 랜덤 발생
+		//점수 랜덤 발생''''''''''''''''''''''''''''''''''''''''''''''''
 		for(int i = 0; i < score.length; i++) { //i를 score.length(=25)번 1씩 증가하면서 반복
 			for(int j = 0; j < score[i].length; j++) { // score[i].length = 7
 				score[i][j] = (int)(Math.random()*101); // 모든 배열에 0~100까지의 랜덤값 부여
@@ -101,6 +101,7 @@ public class ScoreSem {
 		}
 		
 		System.out.println("\t합계\t평균\t석차");
+		
 		for(int i = 0; i < score.length; i++) { // score.length 길이만큼 반복
 			System.out.print(names[i] + "\t"); // 해당 이름만 출력
 			

@@ -40,6 +40,7 @@ public class RegularExpression {
 		System.out.println(m.matches());
 		
 		// 아이디, 전화번호, 이메일 주소의 유효성을 검사하는 정규 표현식을 만들어주세요.
+		
 		// 아이디 : 5~15자리의 영문 소문자, 숫자만 사용가능
 		// 아이디 : [a-z0-9_-]{5,20}
 		String id = "oegoeg123";

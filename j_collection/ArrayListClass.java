@@ -68,11 +68,11 @@ public class ArrayListClass {
 		
 		//size, remove
 		
-//		for(int i = 0; i < list.size(); i++) {
-//			System.out.println(i + " : " + list.remove(i)); // for문을 돌면서 remove진행, 삭제된값은 리턴됨
-//		}
-//		System.out.println(list); // 리턴된값 출력, 뒤에있는 애들이 계속 땡겨져서 2번만 돌게됨
-//		// 여러개 삭제할때는 for문을 증가하는 방향으로 돌리면 제대로 삭제 불가능
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(i + " : " + list.remove(i)); // for문을 돌면서 remove진행, 삭제된값은 리턴됨
+		}
+		System.out.println("-" + list); // 리턴된값 출력, 뒤에있는 애들이 계속 땡겨져서 2번만 돌게됨
+		// 여러개 삭제할때는 for문을 증가하는 방향으로 돌리면 제대로 삭제 불가능
 		
 		for(int i = list.size() - 1; i >= 0; i--) {
 			System.out.println(i + " : " + list.remove(i));

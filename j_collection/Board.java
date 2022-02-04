@@ -1,91 +1,153 @@
 package j_collection;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import e_oop.ScanUtil;
+
+// 게시판 만들기
 
 public class Board {
 
 	public static void main(String[] args) {
-		/*
-		 * ArrayList와 HashMap을 사용해 게시판 테이블을 만들고
-		 * 조회, 등록, 수정, 삭제가 가능한 게시판을 만들어주세요.
-		 * 
-		 * 글번호, 제목, 내용, 작성자, 날짜... -> 테이블컬럼
-		 * 조회, 등록, 수정, 삭제하는 기능을 만들어야함
-		 * 
-		 * 가장 먼저 목록(내용X)을 띄우게 -> 조회(상세 내용을 볼수있도록) , 새로운 글을 등록
-		 * 조회를 한 후 지금 보고있는 글을 수정하거나 삭제할수 있도록
-		 * 
-		 */
-		
-		ArrayList<HashMap<String, Object>> boardTable = new ArrayList<HashMap<String, Object>>();
-		
+		new Board().start();
+	}
+
+	ArrayList<HashMap<String, Object>> boardTable = new ArrayList<HashMap<String, Object>>();
+	
+	SimpleDateFormat format = new SimpleDateFormat("MM-dd");
+
+	void start() {
+		while (true) {
+			System.out.println("============================");
+			System.out.println("번호\t제목\t작성자\t날짜");
+
+			for (int i = boardTable.size() - 1; i >= 0; i--) { // ???
+				System.out.println("────────────────────────────");
+
+				HashMap<String, Object> board = boardTable.get(i);
+				System.out.println(board.get("BOARD_NO") + "\t" 
+								 + board.get("TITLE") + "\t" 
+								 + board.get("USER_NAME") + "\t" 
+								 + format.format(board.get("REG_DATE")));
+			}
+			System.out.println("────────────────────────────");
+
+			System.out.println("1.등록 2.조회 3.종료");
+			int input = ScanUtil.nextInt();
+
+			switch (input) {
+			case 1:
+				insert();
+				break;
+			case 2:
+				read();
+				break;
+			case 3:
+				System.out.println("종료합니다.");
+				System.exit(0);
+			}
+
+		}
+	}
+
+	private void insert() {
+
 		HashMap<String, Object> board = new HashMap<String, Object>();
 
-		System.out.println("[글목록] [작성자]  [제목]           [작성날짜]");
-		System.out.println("ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ");
-		
-		board = new HashMap<String, Object>();
-		board.put("BOARD_NUM",1);
-		board.put("BOARD_NAME","라이언");
-		board.put("BOARD_TITLE","오늘의 날씨는 맑음");
-		board.put("BOARD_DATE","2022-01-28");
-		
-		boardTable.add(board);
-		
-		board = new HashMap<String, Object>();
-		board.put("BOARD_NUM",2);
-		board.put("BOARD_NAME","어피치");
-		board.put("BOARD_TITLE","저녁에 뭐먹지");
-		board.put("BOARD_DATE","2022-01-20");
-		
-		boardTable.add(board);
-		
-		board = new HashMap<String, Object>();
-		board.put("BOARD_NUM",3);
-		board.put("BOARD_NAME","무지");
-		board.put("BOARD_TITLE","어제 일기");
-		board.put("BOARD_DATE","        2022-01-15");
-		
-		boardTable.add(board);
-		
-		board = new HashMap<String, Object>();
-		board.put("BOARD_NUM",4);
-		board.put("BOARD_NAME","죠르디");
-		board.put("BOARD_TITLE","딸기는 정말 맛있어");
-		board.put("BOARD_DATE","2022-01-10");
-		
-		boardTable.add(board);
-		
-
-		
-		for(int i = 0; i < boardTable.size(); i++) {
-			board = boardTable.get(i);
-			for(String key : board.keySet()) {
-				System.out.print(board.get(key) + "\t");
+		int max = 0;
+		for (int i = 0; i < boardTable.size(); i++) {
+			if (max < (int) boardTable.get(i).get("BOARD_NO")) { // 글번호의 최대값을 찾고 +1을 해줌
+				max = (int) boardTable.get(i).get("BOARD_NO");
 			}
-			System.out.println();
 		}
-		System.out.println("ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ ㅡ");
-		int input;
-		System.out.println("( 1.조회  2.등록  3.수정  4.삭제 )");
-		input = ScanUtil.nextInt();
-		switch(input) {
-		case 1: break;
-			
+
+		board.put("BOARD_NO", max + 1);
+
+		System.out.println("제목 : ");
+		board.put("TITLE", ScanUtil.nextLine());
+
+		System.out.println("작성자 : ");
+		board.put("USER_NAME", ScanUtil.nextLine());
+
+		System.out.println("내용 : ");
+		board.put("CONTENT", ScanUtil.nextLine());
+
+		board.put("REG_DATE", new Date());
+
+		boardTable.add(board);
+
+		System.out.println("게시글 등록 완료");
+
+	}
+
+	private void read() {
+
+		System.out.println("조회할 게시물 번호를 입력해주세요");
+		int boardNo = ScanUtil.nextInt();
+
+		HashMap<String, Object> board = null;
+		for (int i = 0; i < boardTable.size(); i++) {
+			if (boardNo == (int) boardTable.get(i).get("BOARD_NO")) {
+				board = boardTable.get(i);
+				break;
+			}
+		}
+
+		System.out.println("=======================");
+		System.out.println("제목 : " + board.get("TITLE"));
+		System.out.println("-----------------------");
+		System.out.println("작성자 : " + board.get("USER_NAME"));
+		System.out.println("-----------------------");
+		System.out.println("내용 : " + board.get("CONTENT"));
+		System.out.println("-----------------------");
+		System.out.println("작성일 : " + board.get("REG_DATE"));
+
+		System.out.println("1.수정 2.삭제 3.목록");
+		int input = ScanUtil.nextInt();
+
+		switch (input) {
+		case 1:
+			update(board);
+			break;
 		case 2:
-			
-		
+			delete(board);
+			break;
+		case 3:
+			break;
 		}
-		
-		
-		
-		
-		
-		
+
+	}
+
+	private void update(HashMap<String, Object> board) {
+
+		System.out.println("수정할 제목 -> ");
+		board.put("TITLE", ScanUtil.nextLine());
+
+		System.out.println("수정할 내용 -> ");
+		board.put("CONTENT", ScanUtil.nextLine());
+
+		System.out.println("게시물을 수정하였습니다.");
+
+	}
+
+	private void delete(HashMap<String, Object> board) {
+
+		System.out.println("정말 삭제하시겠습니까?(Y/N)");
+		String input = ScanUtil.nextLine();
+
+		if (input.equals("Y")) {
+			for (int i = 0; i < boardTable.size(); i++) {
+				if (board.get("BOARD_NO") == boardTable.get(i).get("BOARD_NO")) {
+					boardTable.remove(i);
+					System.out.println("게시물이 삭제되었습니다");
+					break;
+				}
+
+			}
+		}
 
 	}
 
