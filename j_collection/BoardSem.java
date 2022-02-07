@@ -150,3 +150,15 @@ public class BoardSem {
 		System.out.println("게시글이 수정되었습니다.");
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

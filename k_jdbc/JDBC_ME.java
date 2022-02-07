@@ -42,7 +42,7 @@ public class JDBC_ME {
 			if(con != null) try {con.close();} catch(Exception e) {}
 		}
 		
-		System.out.println("-------------------------------------------");
+		//--------------------------------------------
 		System.out.println("UPDATE");
 		
 		try {
@@ -65,6 +65,7 @@ public class JDBC_ME {
 			if(con != null) try {con.close();} catch(Exception e) {}
 		}
 		
+		//------------------------------------------
 		System.out.println("INSERT");
 		
 		try {
